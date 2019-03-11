@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>超级富豪</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link href="https://cdn.bootcss.com/mui/3.7.1/css/mui.min.css" rel="stylesheet">
+  <script type="text/javascript" charset="utf-8">
+    var getLastHigh = function (id) {
+      $.ajax({
+        url: 'http://www.lsj.today/zb/data/v1/kline?market=' + id + '_qc&type=1day',
+        type: 'get',
+        success: function (data) {
+          var k = data.data;
+          var len = k.length;
+          var last = k[len - 2];
+          var high = last[2];
+          $('#' + id).val(high)
+          doLogin()
+        }
+      })
+    }
+
+    $(function () {
+      getLastHigh('brc');
+      getLastHigh('eth');
+    })
+
+    function doLogin() {
+      var eth = $('#eth').val();
+      var brc = $('#brc').val();
+
+      if (!eth || !brc) {
+        return;
+      }
+
+      $.ajax({
+        url: 'https://www.billionaire-vip.com/jsq/calculator?brc=' + brc + '&eth=' + eth,
+
+        type: 'get',
+        ataType: 'jsonp',
+        success: function (data) {
+          var power = $('#power').val();
+          var da = data;
+          var danweishouyi = da;
+          var rishouyi = danweishouyi * power;
+          var rishouyi_price = rishouyi * brc;
+
+          $('#day').val(rishouyi + "BRC");
+          $('#day_price').val(rishouyi_price + "QC");
+        },
+        error: function (xhr, type, errorThrown) {}
+      });
+    }
+  </script>
+
+</head>
+
+<body class="mui-android mui-android-6 mui-android-6-0">
+  <header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">超级富豪收益计算器</h1>
+  </header>
+  <div class="mui-content">
+    <div class="mui-card" style="padding-bottom: 10px;margin-top: 5px;">
+      <form class="mui-input-group">
+        <div class="mui-tab-label" style="padding: 16px;">
+          <label>输入计算日ZB交易所上ETH最高成交价格和BRC最高成交价格，以QC价格计算</label>
+        </div>
+        <div class="mui-input-row">
+          <label>ETH价格</label>
+          <input type="text" id="eth" class="mui-input-clear" placeholder="ZB交易所ETH最高价格">
+        </div>
+        <div class="mui-input-row">
+          <label>BRC价格</label>
+          <input type="text" id="brc" class="mui-input-clear" placeholder="ZB交易所BRC最高价格">
+        </div>
+
+        <div class="mui-input-row">
+          <label>您的盈利能力</label>
+          <input type="text" value=1485000 id="power" class="mmui-input-clear" placeholder="当前盈利能力">
+        </div>
+        <div class="mui-button-row">
+          <button type="button" class="mui-btn mui-btn-primary" style="width: 60%;" onclick="doLogin()">计算收益</button>
+
+        </div>
+
+        <div class="mui-input-row">
+          <label>预计一天的收益:</label>
+          <input type="text" id="day" disabled="disabled" class="mmui-input-clear">
+        </div>
+        <div class="mui-input-row">
+          <label>预计一天的收益价值:</label>
+          <input type="text" id="day_price" disabled="disabled" class="mmui-input-clear">
+        </div>
+      </form>
+    </div>
+    <div style="padding-bottom: 40px;text-align: center;">
+      <img src="eth.png" width="90px" height="90px" />
+      <p>
+        <a href="https://www.billionaire-vip.com">觉得好用, 打赏ETH吧</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+
+</html>
