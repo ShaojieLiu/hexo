@@ -9,7 +9,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
   <title>超级富豪</title>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+  <!-- <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script> -->
+  <!-- <script src="http://cdn.bootcss.com/zeroclipboard/2.0.2/ZeroClipboard.min.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/zeroclipboard/2.3.0/ZeroClipboard.Core.min.js"></script> -->
   <link href="https://cdn.bootcss.com/mui/3.7.1/css/mui.min.css" rel="stylesheet">
+
   <script type="text/javascript" charset="utf-8">
     var getLastHigh = function (id) {
       $.ajax({
@@ -63,7 +68,7 @@
 
 <body class="mui-android mui-android-6 mui-android-6-0">
   <header class="mui-bar mui-bar-nav">
-    <h1 class="mui-title">超级富豪收益计算器</h1>
+    <h1 class="mui-title">超级富豪收益 自动 计算器</h1>
   </header>
   <div class="mui-content">
     <div class="mui-card" style="padding-bottom: 10px;margin-top: 5px;">
@@ -99,13 +104,24 @@
         </div>
       </form>
     </div>
-    <div style="padding-bottom: 40px;text-align: center;">
+    <div class="copy" data-clipboard-target="#address" style="padding-bottom: 40px; text-align: center; cursor: pointer">
+      <br>
       <img src="/html/jsq/eth.png" width="90px" height="90px" />
       <p>
-        <a href="https://www.billionaire-vip.com">觉得好用, 打赏ETH吧</a>
+        <span style="color: blue">觉得好用, 打赏BRC吧</span>
+        <br>
+        <span style="color: gray">点击复制打赏地址</span>
+        <br>
+        <input id="address" value="0xcF270c55708928eAa3dA5bF0B35a92FeC2ccd4Be"></input>
+        <!-- <span>0xcF270c55708928eAa3dA5bF0B35a92FeC2ccd4Be</span> -->
       </p>
     </div>
   </div>
+
+
+  <script>
+    new ClipboardJS('.copy');
+  </script>
 
 </body>
 
