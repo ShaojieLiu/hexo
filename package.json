@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "d": "hexo clean && hexo g && cp -r ./page/ ./public/page/ && hexo d"
+    "d": "hexo clean && hexo g && cp -r ./page/ ./public/page/ && hexo d",
+    "p": "cp -r ./page/ ./public/page/ && hexo d"
   },
   "hexo": {
     "version": "3.8.0"
