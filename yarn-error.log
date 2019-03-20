@@ -5,13 +5,16 @@ PATH:
   /usr/local/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/liushaojie/node_script/apache-maven-3.5.4/bin:/Users/liushaojie/node_script/apache-maven-3.5.4/bin
 
 Yarn version: 
-  0.23.2
+  1.13.0
 
 Node version: 
-  9.8.0
+  8.11.1
 
 Platform: 
   darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, symlink '../../bin/cli.js' -> '/Users/liushaojie/Library/Caches/Yarn/v4/npm-@cvte-easi-config-1.0.10-52eddb3a0717297ca79b6caf7cce94a1aa2da850/node_modules/@cvte/easi-config/.bin/@cvte/easi-config'
 
 npm manifest: 
   {
@@ -19,13 +22,13 @@ npm manifest:
     "version": "0.0.0",
     "private": true,
     "scripts": {
-      "d": "hexo clean && hexo g && cp -r ./page/ ./public/page/ && hexo d",
-      "p": "cp -r ./page/ ./public/page/ && hexo d"
+      "d": "hexo clean && hexo g && cp -r ./page/ ./public/page/ && hexo d"
     },
     "hexo": {
       "version": "3.8.0"
     },
     "dependencies": {
+      "@cvte/easi-config": "^2.0.1",
       "hexo": "^3.8.0",
       "hexo-deployer-git": "^1.0.0",
       "hexo-generator-archive": "^0.1.4",
@@ -35,7 +38,8 @@ npm manifest:
       "hexo-renderer-ejs": "^0.3.0",
       "hexo-renderer-marked": "^0.3.0",
       "hexo-renderer-stylus": "^0.3.1",
-      "hexo-server": "^0.2.0"
+      "hexo-server": "^0.2.0",
+      "upath": "^1.1.2"
     }
   }
 
