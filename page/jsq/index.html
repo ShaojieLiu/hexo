@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
   <title>超级富豪</title>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+  <!-- <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script> -->
   <!-- <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script> -->
   <!-- <script src="http://cdn.bootcss.com/zeroclipboard/2.0.2/ZeroClipboard.min.js"></script> -->
   <!-- <script src="https://cdn.bootcss.com/zeroclipboard/2.3.0/ZeroClipboard.Core.min.js"></script> -->
@@ -17,18 +17,28 @@
 
   <script type="text/javascript" charset="utf-8">
     var getLastHigh = function (id) {
-      $.ajax({
-        url: 'http://www.lsj.today/zb/data/v1/kline?market=' + id + '_qc&type=1day',
-        type: 'get',
-        success: function (data) {
-          var k = data.data;
-          var len = k.length;
-          var last = k[len - 2];
-          var high = last[2];
-          $('#' + id).val(high)
-          doLogin()
-        }
-      })
+      var doAjax = function () {
+        $.ajax({
+          url: 'http://www.lsj.today/zb/data/v1/kline?market=' + id + '_qc&type=1day',
+          type: 'get',
+          success: function (data) {
+            try {
+              var k = data.data;
+              var len = k.length;
+              var last = k[len - 2];
+              var high = last[2];
+              $('#' + id).val(high)
+              doLogin()
+            } catch (e) {
+              // 中币接口偶尔会抽风, 所以需要重连
+              console.error(e);
+              doAjax();
+            }
+          }
+        })
+      }
+
+      doAjax();
     }
 
     $(function () {
@@ -110,7 +120,7 @@
       <p>
         <span style="color: blue">觉得好用, 打赏BRC吧</span>
         <br>
-        <span style="color: gray">点击复制打赏地址</span>
+        <span style="color: gray">点击复制打赏地址<br />(此为imtoken地址, 若使用贝尔钱包需用"提出"功能)</span>
         <br>
         <input id="address" value="0xcF270c55708928eAa3dA5bF0B35a92FeC2ccd4Be"></input>
         <!-- <span>0xcF270c55708928eAa3dA5bF0B35a92FeC2ccd4Be</span> -->
@@ -119,6 +129,7 @@
   </div>
 
 
+  <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
   <script>
     new ClipboardJS('.copy');
   </script>

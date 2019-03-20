@@ -110,9 +110,9 @@ menu_icons:
 
 # Schemes
 # scheme: Muse
-#scheme: Mist
-#scheme: Pisces
-scheme: Gemini
+scheme: Mist
+# scheme: Pisces
+# scheme: Gemini
 
 # ---------------------------------------------------------------
 # Sidebar Settings
