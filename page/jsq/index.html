@@ -132,6 +132,12 @@
   <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
   <script>
     new ClipboardJS('.copy');
+    var powerDom = document.querySelector('#power');
+    var myStorage = window.localStorage;
+
+    var powerStored = myStorage.getItem('power');
+    powerStored && (powerDom.value = powerStored);
+    powerDom.addEventListener('input', ev => myStorage.setItem('power', ev.target.value));
   </script>
 
 </body>
